@@ -1,0 +1,168 @@
+﻿@model IEnumerable<My_pro.Model.Chapters>
+
+@{
+    Layout = null;
+    List<My_pro.Model.Levels> TLevels = ViewData["AllLevels"] as List<My_pro.Model.Levels>;
+    int CountId = 1;
+}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="~/img/Default/Icon/Bim.png" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Chapter</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/fresh-bootstrap-table.css" rel="stylesheet" />
+    <link href='~/css/Alert.css' rel='stylesheet' type='text/css'>
+
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="fresh-table toolbar-color-blue full-screen-table">
+            <!--
+                Available colors for the full background: full-color-blue, full-color-azure, full-color-green, full-color-red, full-color-orange
+                Available colors only for the toolbar: toolbar-color-blue, toolbar-color-azure, toolbar-color-green, toolbar-color-red, toolbar-color-orange
+            -->
+            <div class="toolbar">
+                <button id="alertBtn" data-toggle="modal" data-target="#squarespaceModal" class="btn btn-default">Add Chapter</button>
+            </div>
+            <table id="fresh-table" class="table">
+                <thead>
+                <th data-field="id">ID</th>
+                <th data-field="name" data-sortable="true">Lecture</th>
+                <th data-field="salary" data-sortable="true">Level</th>
+                <th data-field="country" data-sortable="true">Date</th>
+                <th data-field="city">Order number</th>
+                <th data-field="actions">Actions</th>
+                </thead>
+                <tbody>
+                    @foreach (var o in Model)
+                    {
+                        <tr>
+                            <td>@CountId</td>
+                            <td>@o.Name</td>
+                            <td>@o.Level_Name</td>
+                            <td>@o.Date</td>
+                            <td>@o.Count</td>
+                            <td>
+                                <a rel="tooltip" class="table-action like" href="../../../Levels/Question/" title="Add Questions">
+                                    <i class="fa fa-plus-circle"></i>
+                                </a>
+                                <a class="table-action remove" data-toggle="modal" data-target="#DelConfirm" onclick="Setval('@o.Id');" title="Delete from Course">
+                                    <i class="fa fa-remove"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        CountId++;
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    @using (Html.BeginForm("NewChapter", "Levels", FormMethod.Post))
+    {
+    <!-- alart modal -->
+        <div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                        <h3 class="modal-title" id="lineModalLabel">Dialog :</h3>
+                    </div>
+                    <div class="modal-body">
+                        <!-- content goes here -->
+                        <form>
+                            <div class="form-group">
+                                <label>Chapter Titel</label>
+                                <input type="text" class="tx-T" id="TName" name="TName" placeholder="Enter titel">
+                            </div>
+                            <div class="main">
+                                <label>Choose Level</label>
+                                <select class="" id="LevelId" name="LevelId">
+                                    @foreach (var l in TLevels)
+                                    {
+                                        <option value="@l.Id">@l.Name</option>
+                                    }
+                                </select>
+
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer btn-G">
+                        <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn-T" data-dismiss="modal" role="button">Close</button>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <button type="submit" id="saveImage" class="btn-T btn-hover-green" data-action="save" role="button">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- end alart modal -->
+    }
+
+    <!-- alart modal -->
+    <div class="modal fade" id="DelConfirm" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h3 class="modal-title" id="lineModalLabel">Dialog :</h3>
+                </div>
+                <div class="modal-body">
+                    <!-- content goes here -->
+                    <form>
+                        <label>Do you want to delete it?</label>
+                    </form>
+                </div>
+                <div class="modal-footer btn-G">
+                    <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn-T" data-dismiss="modal" role="button">Close</button>
+                        </div>
+                        <div class="btn-group btn-delete" role="group">
+                            <button onclick="DelChapter();" type="button" id="delImage" class="btn-T btn-hover-red" data-dismiss="modal" role="button">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end alart modal -->
+</body>
+</html>
+
+<script src="~/js/jquery-1.11.2.min.js"></script>
+<script src="~/js/bootstrap.js"></script>
+<script src="~/js/bootstrap-table.js"></script>
+<script src="~/js/Alert.js"></script>
+<script type="text/javascript">
+    var L = "";
+    function Setval(x) { L = x; }
+
+    function DelChapter() {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("DelChapter", "Levels")',
+                data: { id: L },
+                dataType: 'json',
+                success: function (data) {
+                    window.location.href = "../../../Levels/Chapter";
+                },
+                error: function (xhr) {
+                    window.location.href = "../../../Levels/Chapter";
+                }
+            });
+    }
+
+</script>

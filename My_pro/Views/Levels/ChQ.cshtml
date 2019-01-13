@@ -1,0 +1,120 @@
+﻿@model My_pro.Model.QExams
+@{
+    Layout = null;
+    int z = Convert.ToInt16(ViewData["CountQ"].ToString());
+    string chapter = ViewData["chapterQ"].ToString();
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter Exercises</title>
+    <link rel="icon" type="image/png" href="~/img/Default/Icon/Bim.png" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/Quiz.css">
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="TTChapter">
+            <div id="Q" class="modal-content">
+                <div class="modal-header">
+                    <h3>
+                        <span class="label label-warning" id="qid">@z</span>
+                        <span id="TQuestion">@Model.Question</span>
+                    </h3>
+                </div>
+                <div class="modal-body">
+                    <div class="col-xs-3 col-xs-offset-5">
+                        <div id="loadbar" style="display: none;">
+                            <div class="blockG" id="rotateG_01"></div>
+                            <div class="blockG" id="rotateG_02"></div>
+                            <div class="blockG" id="rotateG_03"></div>
+                            <div class="blockG" id="rotateG_04"></div>
+                            <div class="blockG" id="rotateG_05"></div>
+                            <div class="blockG" id="rotateG_06"></div>
+                            <div class="blockG" id="rotateG_07"></div>
+                            <div class="blockG" id="rotateG_08"></div>
+                        </div>
+                    </div>
+
+                    <div class="quiz" id="quiz" data-toggle="buttons">
+                            <label id="L1" class="element-animation1 btn btn-lg btn-primary btn-block">
+                                <span class="btn-label">
+                                    <i class="glyphicon glyphicon-chevron-right"></i>
+                                </span>
+                                <input type="radio" name="q_answer" id="s1" value="@Model.S1">
+                                <span id="Ts1">@Model.S1</span>
+                            </label>
+                            <label id="L2" class="element-animation2 btn btn-lg btn-primary btn-block">
+                                <span class="btn-label">
+                                    <i class="glyphicon glyphicon-chevron-right"></i>
+                                </span>
+                                <input type="radio" name="q_answer" id="s2" value="@Model.S2">
+                                <span id="Ts2">@Model.S2</span>
+                            </label>
+                            <label id="L3" class="element-animation3 btn btn-lg btn-primary btn-block">
+                                <span class="btn-label">
+                                    <i class="glyphicon glyphicon-chevron-right"></i>
+                                </span>
+                                <input type="radio" name="q_answer" id="s3" value="@Model.S3">
+                                <span id="Ts3">@Model.S3</span>
+                            </label>
+                            <label id="L4" class="element-animation4 btn btn-lg btn-primary btn-block">
+                                <span class="btn-label">
+                                    <i class="glyphicon glyphicon-chevron-right"></i>
+                                </span>
+                                <input type="radio" name="q_answer" id="s4" value="@Model.S4">
+                                <span id="Ts4">@Model.S4</span>
+                            </label>
+                        </div>
+                    
+                </div>
+                <div class="modal-footer text-muted" style="padding: 0;text-align: center; color: #000;font-size: x-large;border-radius: 0 0 6px 6px;padding: 0 2.8% 0 0;color: #000;font-size: 23px;">
+                    <span id="answer" style="padding: 4px 46.8%;margin-left: 0px;"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script type="text/javascript">
+    var loading = $('#loadbar').hide();
+    $(document)
+        .ajaxStart(function () {
+            loading.show();
+        }).ajaxStop(function () {
+            loading.hide();
+        });
+
+    $("label.btn").on('click', function () {
+        var choice = $(this).find('input:radio').val();
+        $('#loadbar').show();
+        $('#quiz').fadeOut();
+        var sss = "@Model.S.ToString()";
+
+        if (sss == choice) {
+            $("#answer").text("Correct");
+            $("#answer").removeClass("Wrong");
+            $("#answer").addClass("Correct");
+            window.location.href="../../../Levels/ChQ/@chapter"
+        } else {
+            $("#answer").text("Wrong");
+            $("#answer").removeClass("Correct");
+            $("#answer").addClass("Wrong");    
+            setTimeout(function () {
+                $('#loadbar').fadeOut();
+                $('#quiz').show();
+            }, 1500);
+        }
+
+        
+    });
+
+</script>

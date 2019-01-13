@@ -1,0 +1,433 @@
+﻿@model IEnumerable<My_pro.Model.UploadFile>
+@{
+    Layout = null;
+    My_pro.Model.Entites.Users U = Session["User"] as My_pro.Model.Entites.Users;
+    string pic = Session["Pic"].ToString();}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>My Drive</title>
+    <link rel="icon" type="image/png" href="~/img/Default/Icon/Bim.png" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="~/css/w3.css" rel="stylesheet">
+    <link href="~/css/w3-theme-blue-grey.css" rel="stylesheet">
+    <link href="~/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/css/style4.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/MyDrive.css">
+    <style>
+        html,
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            font-family: "Open Sans", sans-serif
+        }
+
+        .TxSearch {
+            width: 250px;
+            padding: 6px;
+            margin-top: 8.5px;
+            font-size: 13px;
+            border: none;
+            border-radius: 17px 0 0 17px;
+            display: initial;
+            margin-right: -5px;
+        }
+
+        .SubSearch:hover {
+            background: #ccc;
+        }
+
+        .SubSearch {
+            padding: 5px 10px 7px 10px;
+            margin-top: 8.5px;
+            margin-right: 1px;
+            background: #ddd;
+            font-size: 13px;
+            border: none;
+            cursor: pointer;
+            border-radius: 0 17px 17px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Fixed Code -->
+    <div class="wrapper">
+        <!-- Sidebar Holder -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <br>
+                <br>
+                <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+                    <img src="../../../img/icon/M.png" style="height: 20px; width: 20px" alt="Avatar">
+                </button>
+                <h3 class="w3-center">
+                    <a class="w3-center">
+                        <img src="@pic" class="w3-circle" style="height:106px;width:106px" alt="Avatar">
+                    </a><br />
+                    <br> @U.UserName
+                </h3>
+                <strong></strong>
+            </div>
+            <ul class="list-unstyled components">
+                <li class="active">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">
+                        <i class="glyphicon glyphicon-home"></i>
+                        Home
+                    </a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="../../../Home/Main">Main</a>
+                        </li>
+                        <li>
+                            <a href="../../../Home/Base">Home</a>
+                        </li>
+                    </ul>
+                </li>
+                @if (this.User.IsInRole("Admin"))
+                {
+                    <li>
+                        <a href="#TAdmin" data-toggle="collapse" aria-expanded="false">
+                            <i class="glyphicon glyphicon-briefcase"></i>
+                            Admin
+                        </a>
+                        <ul class="collapse list-unstyled" id="TAdmin">
+                            <li>
+                                <a href="../../../Admin/Admin_Control">Admin Dashboard</a>
+                            </li>
+                            <li>
+                                <a href="../../../Admin/AllUsersList">Users</a>
+                            </li>
+                            <li>
+                                <a href="../../../Levels/ViewCoursesAdmin">Courses</a>
+                            </li>
+                            <li>
+                                <a href="../../../Levels/Chapter">Chapters</a>
+                            </li>
+                            <li>
+                                <a href="../../../Levels/Lectures">Lectures</a>
+                            </li>
+                            <li>
+                                <a href="../../../Levels/Question">Questions</a>
+                            </li>
+                            <li>
+                                <a href="../../../Blog/BlogsList">Blogs</a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+                <li>
+                    <a href="#TAccount" data-toggle="collapse" aria-expanded="false">
+                        <i class="glyphicon glyphicon-user"></i>
+                        Account
+                    </a>
+                    <ul class="collapse list-unstyled" id="TAccount">
+                        <li>
+                            <a href="../../../Home/TProfile">Profile</a>
+                        </li>
+                        <li>
+                            <a href="../../../Home/EditProfile">Setting</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="../../../Levels/LevelsView">
+                        <i class="glyphicon glyphicon-education"></i>
+                        Courses
+                    </a>
+                </li>
+                <li>
+                    <a href="../../../Blog/SearchBlog">
+                        <i class="fa fa-lightbulb-o"></i>
+                        Blogs
+                    </a>
+                </li>
+                <li>
+                    <a href="#TFiles" data-toggle="collapse" aria-expanded="false">
+                        <i class="glyphicon glyphicon-folder-open"></i>
+                        Files
+                    </a>
+                    <ul class="collapse list-unstyled" id="TFiles">
+                        <li>
+                            <a href="../../../Files/My_Files">My Drive</a>
+                        </li>
+                        <li>
+                            <a href="../../../Files/All_Files">All Files</a>
+                        </li>
+                        <li>
+                            <a href="../../../Files/Upload_File">Upload File</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#TFriends" data-toggle="collapse" aria-expanded="false">
+                        <i class="fa fa-users"></i>
+                        Friends
+                    </a>
+                    <ul class="collapse list-unstyled" id="TFriends">
+                        <li>
+                            <a href="../../../Friends/Search">Search</a>
+                        </li>
+                        <li>
+                            <a href="../../../Friends/MyFriends">My Friends</a>
+                        </li>
+                        <li>
+                            <a href="../../../Friends/Requests">Requests</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="../../../Home/About">
+                        <i class="glyphicon glyphicon-info-sign"></i>
+                        About
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="w3-top">
+            <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
+                <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"
+                   href="javascript:void(0);" onclick="openNav()">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <a href="../../../Home/Main" class="w3-bar-item w3-button w3-padding-large w3-theme-d4">
+                    <i class="fa fa-home w3-margin-right"></i>Main
+                </a>
+                <a href="../../../Blog/BlogsList" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Blogs">
+                    <i class="fa fa-globe"></i>
+                </a>
+                <div class="w3-dropdown-hover w3-hide-small">
+                    <button class="w3-button w3-padding-large" title="Friends">
+                        <i>
+                            <img src="../../../img/icon/friendicon.png" class="w3-circle" style="height:23px;width:23px" alt="Avatar">
+                        </i>
+                    </button>
+                    <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
+                        <a href="../../../Friends/Search" class="w3-bar-item w3-button Tchoose">
+                            <img src="../../../img/icon/AddFicon.png" class="w3-circle" style="height:23px;width:23px" alt="Avatar"> Add Friends
+                        </a>
+                        <a href="../../../Friends/MyFriends" class="w3-bar-item w3-button Tchoose">
+                            <img src="../../../img/icon/MyFriends.png" class="w3-circle" style="height:23px;width:23px" alt="Avatar"> My Friends
+                        </a>
+                        <a href="../../../Friends/Requests" class="w3-bar-item w3-button Tchoose">
+                            <img src="../../../img/icon/request.png" class="w3-circle" style="height:23px;width:23px" alt="Avatar"> Friend Requests
+                        </a>
+                    </div>
+                </div>
+                <a href="../../../Home/TProfile" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
+                    <img src="@pic" class="w3-circle" style="height:23px;width:23px" alt="Avatar">
+                </a>
+                <a href="../../../Home/EditProfile" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="Edit Profile">
+                    <img src="../../../img/icon/Settings.png" class="w3-circle" style="height:23px;width:23px" alt="Avatar">
+                </a>
+
+                @using (Html.BeginForm("My_Files", "Files", FormMethod.Post))
+                {
+                    <div style="float: right;">
+                        <input class="TxSearch" id="TxSearch" type="text" placeholder=" Search.." name="TxSearch">
+                        <button class="SubSearch" type="submit"><i class="fa fa-search"></i></button>
+                    </div>
+                }
+
+            </div>
+        </div>
+        <!-- End Fixed Code -->
+        <!-- Page Content Holder -->
+        <div id="content">
+            <br>
+            <br>
+            <div class="Tcol m15">
+                <div>
+                    <div class="w3-col m12">
+                        <div class="w3-card w3-round w3-white">
+                            <div class="w3-container w3-padding">
+                                <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+                                <div class="view-account">
+                                    <section class="module">
+                                        <div class="module-inner">
+                                            <div class="content-panel">
+                                                <div class="content-header-wrapper">
+                                                    <h1 class="title">My Drive</h1>
+                                                    <div class="actions">
+                                                        <a href="../../../Files/Upload_File" class="btn btn-success"><i class="fa fa-plus"></i> Upload New Item</a>
+                                                    </div>
+                                                </div>
+                                                <div class="content-utilities">
+                                                    <div class="page-nav">
+                                                        <span class="indicator">View:</span>
+                                                        <div class="btn-group" role="group">
+                                                            <button type="button" class="active btn btn-default" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Grid View" id="V1"><i class="fa fa-th-large"></i></button>
+                                                            <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="List View" id="V2"><i class="fa fa-list-ul"></i></button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="actions">
+                                                        <div class="btn-group" role="group">
+                                                            <a href="../../../Files/My_Files/" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Refresh"><i class="fa fa-refresh"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="Tgrid" class="drive-wrapper drive-grid-view s">
+                                                    <div class="grid-items-wrapper">
+                                                        @foreach (var i in Model)
+                                                        {
+                                                            <div class="drive-item module text-center">
+                                                                <div class="drive-item-inner module-inner" style="padding-bottom: 0px;">
+                                                                    <div class="drive-item-title" style="margin-bottom: 9px;"><a href="@i.URL" download>@i.Name</a></div>
+                                                                    <div class="drive-item-thumb" style="height: 101px;width: 100%;overflow-y: hidden;">
+                                                                        @if (i.Type == "text/plain")
+                                                                        {
+                                                                            <a href="@i.URL" download><i class="fa fa-file-text-o text-primary"></i></a>
+                                                                        }
+                                                                        else if (i.Type == "image/jpeg" || i.Type == "image/GIF" || i.Type == "image/bmp" || i.Type == "image/x-icon" || i.Type == "image/png" || i.Type == "image/svg+xml" || i.Type == "image/tiff")
+                                                                        {
+                                                                            <a href="@i.URL" download><img class="img-responsive" src="@i.Img" alt=""></a>
+                                                                        }
+                                                                        else if (i.Type == "application/msword")
+                                                                        {
+                                                                            <a href="@i.URL" download><i class="fa fa-file-word-o text-info"></i></a>
+
+                                                                        }
+                                                                        else if (i.Type == "Application/x-msexcel")
+                                                                        {
+                                                                            <a href="@i.URL" download><i class="fa fa-file-excel-o text-success"></i></a>
+                                                                        }
+                                                                        else if (i.Type == "application/vnd.ms-powerpoint" || i.Type == "application/vnd.openxmlformats" || i.Type == "officedocument.presentationml.presentation")
+                                                                        {
+                                                                            <a href="@i.URL" download><i class="fa fa-file-powerpoint-o text-success"></i></a>
+                                                                        }
+                                                                        else if (i.Type == "application/pdf")
+                                                                        {
+                                                                            <a href="@i.URL" download><i class="fa fa-file-pdf-o text-danger"></i></a>
+                                                                        }
+                                                                        else if (i.Type == "multipart/x-zip" || i.Type == "application/zip" || i.Type == "application/x-zip-compressed" || i.Type == "application/octet-stream" || i.Type == "application/zip" || i.Type == "application/octet-stream" || i.Type == "application/x-rar-compressed" || i.Type == "application/x-7z-compressed")
+                                                                        {
+                                                                            <a href="@i.URL" download><i class="fa fa-file-zip-o text-primary"></i></a>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <a href="@i.URL" download><i class="fa fa-file-o text-primary"></i></a>
+                                                                        }
+                                                                    </div>
+                                                                </div>
+                                                                <div class="drive-item-footer module-footer">
+                                                                    <ul class="utilities list-inline">
+                                                                        <li><a href="@i.URL" data-toggle="tooltip" data-placement="top" title="" data-original-title="Download" download><i class="fa fa-download"></i></a></li>
+                                                                        <li><a href='@Url.Action("Delete", "Files",new { id = i.Id })' data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="fa fa-trash"></i></a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+
+                                                        }
+                                                    </div>
+                                                </div>
+
+
+                                                <div id="Tlist" class="drive-wrapper drive-list-view h">
+                                                    <div class="table-responsive drive-items-table-wrapper">
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th class="type"></th>
+                                                                    <th class="name truncate">Name</th>
+                                                                    <th class="date">Uploaded</th>
+                                                                    <th class="size">Size</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach (var i in Model)
+                                                                {
+                                                                    <tr>
+                                                                        @if (i.Type == "text/plain")
+                                                                        {
+                                                                            <td><a href="@i.URL" download><i class="fa fa-file-text-o text-primary"></i></a></td>
+                                                                        }
+                                                                        else if (i.Type == "image/jpeg" || i.Type == "image/GIF" || i.Type == "image/bmp" || i.Type == "image/x-icon" || i.Type == "image/png" || i.Type == "image/svg+xml" || i.Type == "image/tiff")
+                                                                        {
+                                                                            <td><a href="@i.URL" download><img class="img-responsive" src="@i.Img" alt=""></a></td>
+                                                                        }
+                                                                        else if (i.Type == "application/msword")
+                                                                        {
+                                                                            <td><a href="@i.URL" download><i class="fa fa-file-word-o text-info"></i></a></td>
+
+                                                                        }
+                                                                        else if (i.Type == "Application/x-msexcel")
+                                                                        {
+                                                                            <td><a href="@i.URL" download><i class="fa fa-file-excel-o text-success"></i></a></td>
+                                                                        }
+                                                                        else if (i.Type == "application/vnd.ms-powerpoint" || i.Type == "application/vnd.openxmlformats" || i.Type == "officedocument.presentationml.presentation")
+                                                                        {
+                                                                            <td><a href="@i.URL" download><i class="fa fa-file-powerpoint-o text-success"></i></a></td>
+                                                                        }
+                                                                        else if (i.Type == "application/pdf")
+                                                                        {
+                                                                            <td><a href="@i.URL" download><i class="fa fa-file-pdf-o text-danger"></i></a></td>
+                                                                        }
+                                                                        else if (i.Type == "multipart/x-zip" || i.Type == "application/zip" || i.Type == "application/x-zip-compressed" || i.Type == "application/octet-stream" || i.Type == "application/zip" || i.Type == "application/octet-stream" || i.Type == "application/x-rar-compressed" || i.Type == "application/x-7z-compressed")
+                                                                        {
+                                                                            <td><a href="@i.URL" download><i class="fa fa-file-zip-o text-primary"></i></a></td>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <td><a href="@i.URL" download><i class="fa fa-file-o text-primary"></i></a></td>
+                                                                        }
+                                                                        <td class="name truncate"><a href="@i.URL" download="">@i.Name</a></td>
+                                                                        <td class="date">@i.Time</td>
+                                                                        <td class="size">@i.Size Byte</td>
+                                                                    </tr>
+                                                                }
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                        </div><br><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<!-- jQuery CDN -->
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<!-- Bootstrap Js CDN -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sidebar').toggleClass('active');
+
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+
+    });
+    $("#V1").click(function () {
+        if ($('#Tgrid').hasClass('h')) {
+            $('#V2').removeClass('active')
+            $("#V1").toggleClass('active');
+            $('#Tgrid').removeClass('h').toggleClass('s');
+            $('#Tlist').removeClass('s').toggleClass('h');
+        }
+    });
+    $("#V2").click(function () {
+        if ($('#Tgrid').hasClass('s')) {
+            $('#V1').removeClass('active')
+            $("#V2").toggleClass('active');
+            $('#Tgrid').removeClass('s').toggleClass('h');
+            $('#Tlist').removeClass('h').toggleClass('s');
+        }
+    });
+</script>

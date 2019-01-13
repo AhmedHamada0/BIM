@@ -1,0 +1,105 @@
+﻿@model My_pro.Model.Entites.Users
+
+@{
+   Layout = null;
+   string verror = Session["view"].ToString();
+}
+<!DOCTYPE html>
+<html>
+<head>
+<title>Register Login Widget Flat Responsive Widget Template :: w3layouts</title>
+<!--Custom Theme files-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="BIM, BIMarabia, BIMCourses, bimarabia, bim arabia,BIMarabia-Courses" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- Custom Theme files -->
+<link href="~/css/Login.css" rel="stylesheet" type="text/css" media="all" />
+<!--web-fonts-->
+<link href='//fonts.googleapis.com/css?family=Jura:400,300,500,600' rel='stylesheet' type='text/css'>
+<style>
+    .Error {
+        color: #fff;
+        border-color: #ebccd1;
+        padding: 4px 2px;
+        border-radius: 20px;
+        box-shadow: 0 0px 4px 0 rgba(0,0,0,50.15),0 2px 14px 0 rgba(0,0,0,0.15) !important;
+        width: 59%;
+        display: inline-block;
+        background-color: #e15050;
+        margin-top: 1em;
+    }
+</style>
+</head>
+<body>
+	<h1 style="margin-bottom:55px;">BIMarabia-Courses</h1>
+    <div style="text-align:center;margin-top:2px;">
+        @if (verror == "true")
+        {
+            @Html.ValidationMessage("Invalid", new { @class = "Error" });
+        }
+</div>
+
+	<!-- main -->
+	<div class="main" style="margin-top :1em;">
+		<!--login-profile-->
+		<!--login-profile-->
+		<!--signin-form-->
+		<div class="w3">
+			<div class="signin-form profile">
+				@using (Html.BeginForm("Login", "Home", FormMethod.Post))
+                {
+				<h3>Login</h3>
+				
+				<div class="login-form">
+					<form action="#" method="post">
+						<input type="text" name="Email" id="Email" placeholder="E-mail" required="">
+						<input type="password" name="password" id="password" placeholder="Password" required="">
+						<div class="tp">
+							<input type="submit" value="LOGIN NOW">
+						</div>
+					</form>
+				</div>
+				
+					}
+			</div>
+		</div>
+		<div class="agile">
+			<div class="signin-form profile">
+				@using (Html.BeginForm("Create", "Home", FormMethod.Post))
+                {
+                        @Html.AntiForgeryToken()
+				<h3>Register</h3>
+				
+				@Html.ValidationSummary(true, "", new { @class = "text-danger", @id = "Group" })
+				<div class="login-form">
+					<form action="#" method="post">
+						@Html.EditorFor(model => model.Email, new { htmlAttributes = new { placeholder = "E-mail" , required="" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+
+                        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { placeholder = "User-Name", required="" } })
+                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+
+                        @Html.Password("Pass", "", new { placeholder = "Password", required="" })
+
+                        @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { placeholder = "Phone", required="" } })
+                        @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+
+                        
+						<input type="submit" value="REGISTER">
+					</form>
+				</div>
+				<p><a> By clicking register, you agree to the terms</a></p>
+			}
+			</div>
+		</div>
+		<div class="clear"></div>
+		<!--//signin-form-->	
+	</div>
+	<div class="copyright">
+		<p>Ⓒ 2018 BIMarabia . All rights reserved | <a href="http://bimarabia.com/" target="_blank" >BIMarabia</a></p>
+	</div>					
+</body>
+</html>
+
+

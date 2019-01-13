@@ -1,0 +1,170 @@
+﻿@model My_pro.Model.Entites.Users
+
+@{
+   Layout = null;
+}
+
+<!DOCTYPE html>
+<html >
+    
+<head>
+    <style>
+        .BG1 {
+            background-image: url(../../../../../images/a.jpg);
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+    </style>
+    <title>Register and Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Register Login Widget template Responsive, Login form web template,Flat Pricing tables,Flat Drop downs  Sign up Web Templates, Flat Web Templates, Login Signup Responsive web template, SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link href="~/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href='http://fonts.googleapis.com/css?family=Jura:400,300,500,600' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="~/css/Style1.css">
+</head>
+<body class="BG1">
+    <div>
+        @Html.ActionLink("Back to List", "Index" , "Home")
+    </div>
+    <script src='../../../../../../ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '../../../../../../www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-30027142-1', 'w3layouts.com');
+        ga('send', 'pageview');
+    </script>
+    <script async type='text/javascript' src='../../../../../../cdn.fancybar.net/ac/fancybar6a2f.js?zoneid=1502&amp;serve=C6ADVKE&amp;placement=w3layouts' id='_fancybar_js'></script>
+    <style type='text/css'>
+        
+    </style>
+    <script>
+        $(function () {
+            $('.adsense_btn_close').click(function () {
+                $(this).closest('.adsense_fixed').css('display', 'none');
+            });
+
+            $('.adsense_btn_info').click(function () {
+                if ($('.adsense_info_content').is(':visible')) {
+                    $('.adsense_info_content').css('display', 'none');
+                } else {
+                    $('.adsense_info_content').css('display', 'block');
+                }
+            });
+
+        });
+
+    </script>
+
+    @{
+        HttpContext.Current.Session["Name"] = null;
+        HttpContext.Current.Session["Email"] = null;
+        HttpContext.Current.Session["Phone"] = null;
+        HttpContext.Current.Session["Type"] = null;
+    }
+
+
+    
+        <h1 class="auto-style2">Register Login</h1>
+        <div class="main">
+            <div class="w3">
+                <div class="signin-form profile">
+                    <h3><span class="auto-style5">[ </span>Login <span class="auto-style5">]</span></h3>
+                    <br />
+
+                    <div class="login-form">
+
+                        @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+                        {
+                            @Html.ValidationSummary(true, "Login Failed , check details");
+                            <div>
+                                <fieldset>
+
+                                    <div class="editor-field">
+                                        @Html.TextBox("Email", "", new { placeholder = My_pro.Lang.Resource.Email })
+                         
+                                    </div>
+
+                                    <div class="editor-field">
+                                        @Html.Password("password", "", new { placeholder = My_pro.Lang.Resource.Password })
+                                    
+                                    </div>
+                                    <div class="tp">
+                                        <input type="submit" value="Log In">
+                                    </div>
+                                </fieldset>
+                            </div>
+                        }
+                    </div>
+                    <div class="header-social wthree">
+                        <a href="Facebook" class="face">
+                            <h5>Facebook</h5>
+                        </a>
+                        <a href="#" class="goog"><h5>Google+</h5></a>
+                        <div class="clear"></div>
+                    </div>
+                    <p><a href="#"> Don't have an account?</a></p>
+                </div>
+            </div>
+            <div class="agile">
+                <div class="signin-form profile">
+                    <h3><span class="auto-style5">[</span> Register <span class="auto-style5">]</span></h3>
+                    <div class="login-form">
+                        @using (Html.BeginForm("Create", "Home", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="form-horizontal">
+                                @TempData["Message"]
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger", @id = "Group" })
+                                <div class="form-group">
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { placeholder = My_pro.Lang.Resource.UserName, @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-10">
+                                        @Html.Password("Pass", "", new { placeholder = My_pro.Lang.Resource.Password })
+                                        @*@Html.EditorFor(model => model.Password, new { htmlAttributes = new { placeholder = My_pro.Lang.Resource.Password, @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })*@
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { placeholder = My_pro.Lang.Resource.Email, @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { placeholder = My_pro.Lang.Resource.PhoneNambar, @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                
+                                <div class="tp">
+                                    <input type="submit" value=@My_pro.Lang.Resource.Register>
+                                </div>
+                            </div>
+                        }
+                    </div><p><a href="#"> By clicking register, I agree to your terms</a></p>
+                </div>
+            </div><div class="clear"></div>
+        </div>
+        <div class="copyright">
+            <p> &copy; 2018 . All rights reserved </p>
+        </div>
+    </body>
+</html>

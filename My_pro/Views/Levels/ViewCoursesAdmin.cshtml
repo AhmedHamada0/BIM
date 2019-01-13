@@ -1,0 +1,588 @@
+﻿@model IEnumerable<My_pro.Model.Levels>
+
+@{
+    Layout = null;
+    List<My_pro.Model.Levels> AllLevel = ViewData["AllLevelForAdmin"] as List<My_pro.Model.Levels>;
+    My_pro.Model.Entites.Users U = Session["CUser"] as My_pro.Model.Entites.Users;
+    string pic = Session["Pic"].ToString();
+    bool T = false;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Course</title>
+    <link rel="icon" type="image/png" href="~/img/Default/Icon/Bim.png" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+    <link rel="stylesheet" href="~/css/w3.css">
+    <link rel="stylesheet" href="~/css/w3-theme-blue-grey.css">
+    <link rel="stylesheet" href="~/css/style4.css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+
+    <link href="~/css/Alert.css" rel="stylesheet" />
+    <style>
+        html,
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            font-family: "Open Sans", sans-serif
+        }
+    </style>
+    <style>
+        .img {
+            width: 85%;
+            height: 60%;
+            margin-top: 12%;
+            margin-bottom: 10%;
+        }
+
+        .Tcol {
+            width: 100%;
+        }
+
+        .flex-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .flex-item3 {
+            background-color: #fff;
+            width: 200px;
+            margin: 18px;
+            height: 270px;
+            border: 1px solid #ccc !important;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            text-align: center;
+        }
+
+            .flex-item3:hover {
+                background-color: #007acc !important;
+                transition: cubic-bezier(0.19, 1, 0.22, 1);
+                color: white;
+                box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+            }
+
+        .flex-item3T {
+            background-color: #fff;
+            width: 200px;
+            margin: 18px;
+            height: 270px;
+            border: 1px solid #ccc !important;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            text-align: center;
+        }
+
+            .flex-item3T:hover {
+                background-color: #797979 !important;
+                transition: cubic-bezier(0.19, 1, 0.22, 1);
+                color: white;
+                box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+            }
+
+        .Tcontainer {
+            padding: 5px;
+            font-size: 20px;
+        }
+
+        .flex-item3:active {
+            background-color: #2e6fdb;
+            color: white;
+            box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        .UploadBtn {
+            min-width: 7.167em;
+            margin-right: 1.6em;
+            border-radius: 6px;
+            border-color: #dbdbdb;
+            color: #676767;
+            background-color: #fff;
+            background-position: 50% 50%;
+            background-image: none,linear-gradient(to bottom,rgba(0,0,0,.01) 0,rgba(0,0,0,.08) 100%);
+            position: relative;
+            overflow: hidden;
+            direction: ltr;
+            vertical-align: middle;
+            margin: 0;
+            padding: 2px 7px;
+            box-sizing: border-box;
+            border-width: 1px;
+            border-style: solid;
+            font: inherit;
+            line-height: 1.72em;
+            text-decoration: none;
+            display: inline-flex;
+            overflow: hidden;
+            user-select: none;
+            cursor: pointer;
+            outline: 0;
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- Fixed Code -->
+    <div class="wrapper">
+        <!-- Sidebar Holder -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <br>
+                <br>
+                <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+                    <img src="../../../img/icon/M.png" style="height: 20px; width: 20px" alt="Avatar">
+                </button>
+                <h3 class="w3-center">
+                    <a class="w3-center">
+                        <img src="@pic" class="w3-circle" style="height:106px;width:106px" alt="Avatar">
+                    </a><br />
+                    <br> @U.UserName
+                </h3>
+                <strong></strong>
+            </div>
+            <ul class="list-unstyled components">
+                <li class="active">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">
+                        <i class="glyphicon glyphicon-home"></i>
+                        Home
+                    </a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="../../../Home/Main">Main</a>
+                        </li>
+                        <li>
+                            <a href="../../../Home/Base">Home</a>
+                        </li>
+                    </ul>
+                </li>
+                @if (this.User.IsInRole("Admin"))
+                {
+                    <li>
+                        <a href="#TAdmin" data-toggle="collapse" aria-expanded="false">
+                            <i class="glyphicon glyphicon-briefcase"></i>
+                            Admin
+                        </a>
+                        <ul class="collapse list-unstyled" id="TAdmin">
+                            <li>
+                                <a href="../../../Admin/Admin_Control">Admin Dashboard</a>
+                            </li>
+                            <li>
+                                <a href="../../../Admin/AllUsersList">Users</a>
+                            </li>
+                            <li>
+                                <a href="../../../Levels/ViewCoursesAdmin">Courses</a>
+                            </li>
+                            <li>
+                                <a href="../../../Levels/Chapter">Chapters</a>
+                            </li>
+                            <li>
+                                <a href="../../../Levels/Lectures">Lectures</a>
+                            </li>
+                            <li>
+                                <a href="../../../Levels/Question">Questions</a>
+                            </li>
+                            <li>
+                                <a href="../../../Blog/BlogsList">Blogs</a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+                <li>
+                    <a href="#TAccount" data-toggle="collapse" aria-expanded="false">
+                        <i class="glyphicon glyphicon-user"></i>
+                        Account
+                    </a>
+                    <ul class="collapse list-unstyled" id="TAccount">
+                        <li>
+                            <a href="../../../Home/TProfile">Profile</a>
+                        </li>
+                        <li>
+                            <a href="../../../Home/EditProfile">Setting</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="../../../Levels/LevelsView">
+                        <i class="glyphicon glyphicon-education"></i>
+                        Courses
+                    </a>
+                </li>
+                <li>
+                    <a href="../../../Blog/SearchBlog">
+                        <i class="fa fa-lightbulb-o"></i>
+                        Blogs
+                    </a>
+                </li>
+                <li>
+                    <a href="#TFiles" data-toggle="collapse" aria-expanded="false">
+                        <i class="glyphicon glyphicon-folder-open"></i>
+                        Files
+                    </a>
+                    <ul class="collapse list-unstyled" id="TFiles">
+                        <li>
+                            <a href="../../../Files/My_Files">My Drive</a>
+                        </li>
+                        <li>
+                            <a href="../../../Files/All_Files">All Files</a>
+                        </li>
+                        <li>
+                            <a href="../../../Files/Upload_File">Upload File</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#TFriends" data-toggle="collapse" aria-expanded="false">
+                        <i class="fa fa-users"></i>
+                        Friends
+                    </a>
+                    <ul class="collapse list-unstyled" id="TFriends">
+                        <li>
+                            <a href="../../../Friends/Search">Search</a>
+                        </li>
+                        <li>
+                            <a href="../../../Friends/MyFriends">My Friends</a>
+                        </li>
+                        <li>
+                            <a href="../../../Friends/Requests">Requests</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="../../../Home/About">
+                        <i class="glyphicon glyphicon-info-sign"></i>
+                        About
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="w3-top">
+            <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
+                <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"
+                   href="javascript:void(0);" onclick="openNav()">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <a href="../../../Home/Main" class="w3-bar-item w3-button w3-padding-large w3-theme-d4">
+                    <i class="fa fa-home w3-margin-right"></i>Main
+                </a>
+                <a href="../../../Blog/BlogsList" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Blogs">
+                    <i class="fa fa-globe"></i>
+                </a>
+                <div class="w3-dropdown-hover w3-hide-small">
+                    <button class="w3-button w3-padding-large" title="Friends">
+                        <i>
+                            <img src="../../../img/icon/friendicon.png" class="w3-circle" style="height:23px;width:23px" alt="Avatar">
+                        </i>
+                    </button>
+                    <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
+                        <a href="../../../Friends/Search" class="w3-bar-item w3-button Tchoose">
+                            <img src="../../../img/icon/AddFicon.png" class="w3-circle" style="height:23px;width:23px" alt="Avatar"> Add Friends
+                        </a>
+                        <a href="../../../Friends/MyFriends" class="w3-bar-item w3-button Tchoose">
+                            <img src="../../../img/icon/MyFriends.png" class="w3-circle" style="height:23px;width:23px" alt="Avatar"> My Friends
+                        </a>
+                        <a href="../../../Friends/Requests" class="w3-bar-item w3-button Tchoose">
+                            <img src="../../../img/icon/request.png" class="w3-circle" style="height:23px;width:23px" alt="Avatar"> Friend Requests
+                        </a>
+                    </div>
+                </div>
+                <a href="../../../Home/TProfile" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
+                    <img src="@pic" class="w3-circle" style="height:23px;width:23px" alt="Avatar">
+                </a>
+                <a href="../../../Home/EditProfile" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="Edit Profile">
+                    <img src="../../../img/icon/Settings.png" class="w3-circle" style="height:23px;width:23px" alt="Avatar">
+                </a>
+            </div>
+        </div>
+        <!-- End Fixed Code -->
+        <!-- Page Content Holder -->
+        <div id="content">
+            <br /><br />
+            <div class="m15">
+                <div class="w3-row-padding">
+                    <div class="m12">
+                        <div class="w3-card w3-round w3-white">
+                            <div class="w3-container w3-padding">
+                                <h3 class="w3-opacity">
+                                    Courses!
+                                    <button data-toggle="modal" data-target="#AddCourse" class="btn btn-primary" style="float: right;">Add Course</button>
+                                </h3>
+                                <hr class="w3-clear">
+                                <div class="flex-container">
+
+                                    @if (AllLevel != null)
+                                    {
+                                        foreach (var o in AllLevel)
+                                        {
+                                            <div onclick="Setval('@o.Id');" id="@o.Id" class="flex-item3" data-toggle="modal" data-target="#ChooseActions">
+                                                <img src="@o.Pic" alt="Norway" Class="img">
+                                                <div class="Tcontainer">
+                                                    <a>@o.Name</a>
+                                                    <a style="font-size: 13px;display: inherit;">@o.Date</a>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </div>
+    </div>
+
+
+
+    <!-- alart modal -->
+    <div class="modal fade" id="AddCourse" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+@using (Html.BeginForm("AddLevel", "Levels", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h3 class="modal-title" id="lineModalLabel">Dialog :</h3>
+                </div>
+                <div class="modal-body">
+                    <!-- content goes here -->
+
+                    <br>
+                    <div class="form-group">
+                        <label>Course Titel</label>
+                        <input class="tx-T" id="CName" name="CName" placeholder="Enter titel" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label>About</label>
+                        <textarea type="text" class="tx-T" id="CAbout" name="CAbout" rows="4" placeholder="Enter Course Details"></textarea>
+                    </div>
+                    <div class="container" style="width: 100%;">
+                        <div style="margin-bottom: 60px;">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label style="margin: 20px -15px;">Upload Image</label>
+                                    <div class="col-md-15">
+                                        <span style="width: 100%;">
+                                            <img id="Uimg" alt="avatar" style="width: 88%;left: 47%;margin: 0% 0 0 0;height: 170px;border-radius: 18px;" src="../../../img/Default/BG/Dimg.jpg" class="avatar w3-display-middle">
+                                            <br style="margin-bottom: 27%;">
+                                            <a>
+                                                Upload:
+                                            </a>
+                                            <input id="file" name="file" onchange="readURL(this);" class="UploadBtn" style=" font-size:16px;opacity: 1;width: 88%;" type="file">
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                    <br>
+                </div>
+                <div class="modal-footer btn-G">
+                    <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn-T" data-dismiss="modal" role="button">Close</button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="submit" class="btn-T" role="button">Add Course</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+}
+        </div>
+    </div>
+    <!-- end alart modal -->
+
+    <!-- alart modal -->
+    <div class="modal fade" id="ChooseActions" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h3 class="modal-title" id="lineModalLabel">Dialog :</h3>
+                </div>
+                <div class="modal-body">
+
+                    <!-- content goes here -->
+                    <form>
+                        <br>
+                        <label>
+                            Choose from them ...<br>
+                        </label>
+                    </form><br>
+
+                </div>
+                <div class="modal-footer btn-G">
+                    <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+                        <div class="btn-group" role="group">
+                            <a href="../../../Levels/Chapter" class="btn-T btn-hover-red" role="button">Chapters</a>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <a href="../../../Levels/Lectures" id="delImage" class="btn-T btn-hover-red" role="button">Lectures</a>
+                        </div>
+                        <div class="btn-group btn-delete" role="group">
+                            <a href="../../../Levels/Question" id="delImage" class="btn-T btn-hover-red"  role="button">Questions</a>
+                        </div>
+                    </div>
+
+                    <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+                        <div class="btn-group" role="group">
+                            <button onclick="AddUser();" type="button" id="delImage" class="btn-T btn-hover-red" data-dismiss="modal" role="button">Add User</button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button onclick="DelUser();" type="button" id="delImage" class="btn-T btn-hover-red" data-dismiss="modal" role="button">Delete User</button>
+                        </div>
+                        <div class="btn-group btn-delete" role="group">
+                            <button onclick="Certificate();" type="button" class="btn-T btn-hover-red" data-dismiss="modal" role="button">Certificate</button>
+                        </div>
+                    </div>
+
+                    <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn-T" data-dismiss="modal" role="button">Close</button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button onclick="ViewCourse();" type="button" id="delImage" class="btn-T btn-hover-red" data-dismiss="modal" role="button">Join Course</button>
+                        </div>
+                        <div class="btn-group btn-delete" role="group">
+                            <button type="button" id="delImage" data-dismiss="modal" class="btn-T btn-hover-red" data-toggle="modal" data-target="#DeleteCourse" role="button">Delete Course</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end alart modal -->
+
+
+    <!-- alart modal -->
+    <div class="modal fade" id="DeleteCourse" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h3 class="modal-title" id="lineModalLabel">Dialog :</h3>
+                </div>
+                <div class="modal-body">
+
+                    <!-- content goes here -->
+                    <form>
+                        <br>
+                        <label>
+                            Do you want to delete this Course?!<br>
+                        </label>
+                    </form><br>
+
+                </div>
+                <div class="modal-footer btn-G">
+                    <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn-T" data-dismiss="modal" role="button">Close</button>
+                        </div>
+                        <div class="btn-group btn-delete" role="group">
+                            <button onclick="DelCourse();" type="button" id="delImage" class="btn-T btn-hover-red" data-dismiss="modal" role="button">Delete Course</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end alart modal -->
+
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    @*<script type="text/javascript" src="./js/bootstrap-table.js"></script>*@
+    @*<script src="~/js/Alert.js"></script>*@
+    <script type="text/javascript">
+
+        var L = "#";
+        function Setval(x) { L = x; }
+
+        $(document).ready(function () {
+            $('#sidebar').toggleClass('active');
+
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+
+        function ViewCourse() {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("LevelJoin", "Levels")',
+                data: { id: L },
+                dataType: 'json',
+                success: function (Url) {
+                    window.location.href = "../../../Levels/LevelJoin";
+                },
+                error: function (xhr) {
+                    window.location.href = "../../../Levels/LevelJoin";
+                }
+            });
+        }
+
+        function DelCourse() {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("DeleteCourse", "Levels")',
+                data: { id: L },
+                dataType: 'json',
+                success: function (url) {
+                    window.location.href = "../../../Levels/ViewCoursesAdmin/";
+                },
+                error: function (xhr) {
+                    window.location.href = "../../../Levels/ViewCoursesAdmin/";
+                }
+            });
+        }
+
+        function Certificate() {
+            window.location.href = "../../../Levels/LevelDiploma/" + L;
+        }
+
+        function AddUser() {
+            window.location.href = "../../../Admin/AddUserToLevels_Control/" + L;
+        }
+
+        function DelUser() {
+            window.location.href = "../../../Admin/DelUserfromLevels_Control/" + L;
+        }
+
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#Uimg').attr('src', e.target.result).width(200).height(160);
+                    $('#file').val(e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+</body>
+
+</html>
+

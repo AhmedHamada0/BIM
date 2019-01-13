@@ -1,0 +1,50 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="~/img/Default/Icon/Bim.png" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/Quiz.css">
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <title>Finsh</title>
+</head>
+<body>
+    <div> 
+        <div class="container-fluid">
+            <div class="TTChapter">
+                <div id="finsh">
+                    <br />
+                    <h2><strong>Congratulations :)</strong></h2><br /><br />
+                    <h3 id="TMark">You have successfully passed this test.</h3>
+                    <button type="button" onclick="SaveChapter();" class="btn btn-primary" style="width: 17%;float: right;margin-top: 7%;">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+
+    function SaveChapter()
+    {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("SaveChQ", "Levels")',
+            dataType: 'json',
+            success: function (data) {
+                alert('Submitted, thank you');
+            },
+            error: function (xhr) {
+                alert('Submitted, thank you');
+            }
+        });
+    }
+
+</script>

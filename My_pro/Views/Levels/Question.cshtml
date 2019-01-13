@@ -1,0 +1,305 @@
+﻿@model IEnumerable<My_pro.Model.QExams>
+
+@{
+    Layout = null;
+    List<My_pro.Model.Levels> TLevels = ViewData["AllLevels"] as List<My_pro.Model.Levels>;
+    int CountId = 1;
+    My_pro.Model.QExams QD = new My_pro.Model.QExams();
+}
+
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="~/img/Default/Icon/Bim.png" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Question</title>
+
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/fresh-bootstrap-table.css" rel="stylesheet" />
+    <link href='~/css/Alert.css' rel='stylesheet' type='text/css'>
+
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="fresh-table toolbar-color-blue full-screen-table">
+            <!--
+                Available colors for the full background: full-color-blue, full-color-azure, full-color-green, full-color-red, full-color-orange
+                Available colors only for the toolbar: toolbar-color-blue, toolbar-color-azure, toolbar-color-green, toolbar-color-red, toolbar-color-orange
+            -->
+            <div class="toolbar">
+                <button id="alertBtn" data-toggle="modal" data-target="#squarespaceModal" class="btn btn-default">Add Question</button>
+            </div>
+            <table id="fresh-table" class="table">
+                <thead>
+                <th data-field="id" data-sortable="true">ID</th>
+                <th data-field="name" data-sortable="true">Question</th>
+                <th data-field="salary" data-sortable="true">Level</th>
+                <th data-field="country" data-sortable="true">Chapter</th>
+                <th data-field="country" data-sortable="true">Exercises</th>
+                <th data-field="country" data-sortable="true">Final</th>
+                <th data-field="actions">Actions</th>
+                </thead>
+                <tbody>
+                    @foreach (var o in Model)
+                    {
+                        <tr>
+                            <td>@CountId</td>
+                            <td>
+                                @if (o.Question.Length > 100) { o.Question = o.Question.Substring(0, 50); }
+                                @o.Question
+                            </td>
+
+                            <td>@o.LevelName</td>
+
+                            @if (o.Chapter == true)
+                            {
+                            <text><td>@o.NumChapter</td></text>
+                            }
+                            else
+                            {
+                            <text><td>false</td></text>
+                            }
+
+                            @if (o.MoreQ == true)
+                            {
+                            <text><td>true</td></text>
+                            }
+                            else
+                            {
+                            <text><td>false</td></text>
+                            }
+
+                            @if (o.Final == true)
+                            {
+                            <text><td>true</td></text>
+                            }
+                            else
+                            {
+                            <text><td>false</td></text>
+                            }
+                            <td>
+
+                                <a class="table-action remove" data-toggle="modal" data-target="#DelConfirm" onclick="Setval('@o.Id');" title="Delete">
+                                    <i class="fa fa-remove"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        CountId++;
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    @using (Html.BeginForm("AddQuestion", "Levels", FormMethod.Post))
+    {
+            <!-- alart modal -->
+        <div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                        <h3 class="modal-title" id="lineModalLabel">Dialog :</h3>
+                    </div>
+                    <div class="modal-body">
+                        <!-- content goes here -->
+                        <div>
+                            <div class="form-group">
+                                <label>Question ?</label>
+                                <input type="text" class="tx-T" id="TQuestion" name="TQuestion" placeholder="Enter Question">
+                            </div>
+                            <div style="width: 100%;display: inline-flex;">
+                                <div class="form-group" style="width: 48%">
+                                    <label>Sol-1</label>
+                                    <input type="text" class="tx-T" id="Ts1" name="Ts1" placeholder="Enter Sol-1">
+                                </div>
+                                <div class="form-group" style="width: 48%; margin-left: 4%;">
+                                    <label>Sol-2</label>
+                                    <input type="text" class="tx-T" id="Ts2" name="Ts2" placeholder="Enter Sol-2">
+                                </div>
+                            </div>
+                            <div style="width: 100%;display: inline-flex;">
+                                <div class="form-group" style="width: 48%">
+                                    <label>Sol-3</label>
+                                    <input type="text" class="tx-T" id="Ts3" name="Ts3" placeholder="Enter Sol-3">
+                                </div>
+                                <div class="form-group" style="width: 48%; margin-left: 4%;">
+                                    <label>Sol-4</label>
+                                    <input type="text" class="tx-T" id="Ts4" name="Ts4" placeholder="Enter Sol-4">
+                                </div>
+                            </div>
+                            <div class="main" style="margin-bottom: -15px;">
+                                <label for="exampleInputPassword1">Correct Solution</label>
+                                <span class="current"></span>
+                                <select id="Ts" name="Ts">
+                                    <option value="Sol-1">Sol-1</option>
+                                    <option value="Sol-2">Sol-2</option>
+                                    <option value="Sol-3">Sol-3</option>
+                                    <option value="Sol-4">Sol-4</option>
+                                </select>
+                            </div>
+                            <div class="main" style="margin-bottom: -6px;">
+                                <label for="exampleInputPassword1">Choose a Course</label>
+                                <select id="TLevelId" name="TLevelId">
+                                    @foreach (var l in TLevels)
+                                    {
+                                        <option value="@l.Id">@l.Name</option>
+                                    }
+                                </select>
+                            </div>
+                            <label class="container" style="font-size: 15px;">
+                                Add this question to the final exam
+                                <input id="TFinal" name="TFinal" type="checkbox" value="false">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container" style="font-size: 15px;">
+                                Add this question to the Chapter exam
+                                <input id="TChapter" name="TChapter" value="false" type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+
+                            <div class="form-group Txch hidden n" style="width: 48%; margin-left: auto; margin-right: auto;">
+                                <label>Chapter order:</label>
+                                <input id="TChapterNum" name="TChapterNum" type="number" min="0" max="99" step="1" class="tx-T" oninput="validity.valid||(value='');">
+                            </div>
+
+                            <label class="container" style="font-size: 15px;">
+                                Add this question to the Exercise
+                                <input id="TMoreQ" name="TMoreQ" type="checkbox" value="false">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer btn-G">
+                        <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn-T" data-dismiss="modal" role="button">Close</button>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <button type="submit" class="btn-T btn-hover-green" data-action="save" role="button">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+    @using (Html.BeginForm("DelQuestion", "Levels", FormMethod.Post))
+    {
+        <!-- alart modal -->
+        <div class="modal fade" id="DelConfirm" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                        <h3 class="modal-title" id="lineModalLabel">Dialog : Do you want to Delete this Question?</h3>
+                    </div>
+                    <div class="modal-body">
+                        <!-- content goes here -->
+                        <form>
+                            <label>do you want to Delete this Question?</label>
+                        </form>
+                    </div>
+                    <div class="modal-footer btn-G">
+                        <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn-T" data-dismiss="modal" role="button">Close</button>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <button type="button" onclick="DelQuestion();" class="btn-T btn-hover-green" data-action="Delete" role="button">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- end alart modal -->
+    }
+</body>
+</html>
+
+<script src="~/js/jquery-1.11.2.min.js"></script>
+<script src="~/js/bootstrap.js"></script>
+<script src="~/js/bootstrap-table.js"></script>
+<script src="~/js/Alert.js"></script>
+<script type="text/javascript">
+    var L = "";
+    function Setval(x) { L = x; }
+
+    $(document).ready(function () {
+        if (document.getElementById('TChapter').checked != true) {
+            $(".Txch").addClass("hidden");
+        } else {
+            $(".Txch").removeClass("hidden"); // checked
+        }
+    });
+
+    function DelQuestion() {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("DelQuestion", "Levels")',
+            data: { id: L },
+            dataType: 'json',
+            success: function (data) {
+                window.location.href = "../../../Levels/Question/"
+            },
+            error: function (xhr) {
+                window.location.href= "../../../Levels/Question/"
+            }
+        });
+    }
+
+    $('#TFinal').change(function () {
+        if ($(this).prop("checked")) {
+            $('#TFinal').val(true);
+        } else {
+            $('#TFinal').val(false);
+        }
+    });
+    $('#TChapter').change(function () {
+        if ($(this).prop("checked")) {
+            $('#TChapter').val(true);
+        } else {
+            $('#TChapter').val(false);
+        }
+    });
+    $('#TMoreQ').change(function () {
+        if ($(this).prop("checked")) {
+            $('#TMoreQ').val(true);
+        } else {
+            $('#TMoreQ').val(false);
+        }
+    });
+
+
+    $("#TChapter").click(function () {
+        if ($(".Txch").hasClass("hidden")) {
+            $(".Txch").removeClass("hidden"); // checked
+            $("#TChapter").prop("checked", true);
+            $("#TChapterNum").val('');
+        } else {
+            $(".Txch").addClass("hidden");
+            $("#TChapter").prop("checked", false);
+            $("#TChapterNum").val('');
+        }
+    });
+
+</script>

@@ -1,0 +1,164 @@
+﻿@model IEnumerable<My_pro.Model.QExams>
+@{
+    Layout = null;
+    DateTime timeout = Convert.ToDateTime(Session["Timeout"].ToString());
+    int z = 0;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="~/css/final.css">
+    <link rel="stylesheet" href="~/css/w3.css">
+    <link rel="icon" type="image/png" href="~/img/Default/Icon/Bim.png" />
+    <title>Final Exam</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <style>
+        .ee {
+            font-weight: bolder;
+        }
+
+        .choo {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <header>
+            <h1>Course-1 Final</h1>
+            <p>Test your knowledge in <strong>Bimarabia</strong></p>
+            <h4>Time Started at [ <span id="demo">@timeout</span> ]</h4>
+            <h4>Time Out at [ <span id="demo">@timeout.AddHours(2)</span> ]</h4>
+        </header>
+        <section id="STime" class="w3-hide">
+            <br /><br />
+            <h2 style="text-align:center;">Time Out!</h2>
+            <h5 style="text-align:center;">you Can't Submit, the time is Over!</h5>
+        </section>
+        <section id="SQ">
+            <div id="results"></div>
+            <form name="quizForm" onsubmit="return submitAnswers()">
+                <fieldset name="fo">
+                    <br><hr class="w3-clear"><br>
+
+                    @foreach (var q in Model)
+                    {
+                        <h5 class="mb-3 ee">@z ) @q.Question</h5>
+                        <div class="mb-1 ml-4 custom-control custom-radio choose">
+                            <input type="radio" id="a-@z" value="@q.S1" name="@q.Id" class="custom-control-input">
+                            <label class="custom-control-label choo" for="a-@z">@q.S1</label>
+                        </div>
+                        <div class="mb-1 ml-4 custom-control custom-radio choose">
+                            <input type="radio" id="b-@z" value="@q.S2" name="@q.Id" class="custom-control-input">
+                            <label class="custom-control-label choo" for="b-@z">@q.S2</label>
+                        </div>
+                        <div class="mb-1 ml-4 custom-control custom-radio choose">
+                            <input type="radio" id="c-@z" value="@q.S3" name="@q.Id" class="custom-control-input">
+                            <label class="custom-control-label choo" for="c-@z">@q.S3</label>
+                        </div>
+                        <div class="mb-1 ml-4 custom-control custom-radio choose">
+                            <input type="radio" id="d-@z" value="@q.S4" name="@q.Id" class="custom-control-input">
+                            <label class="custom-control-label choo" for="d-@z">@q.S4</label>
+                        </div>
+                        <hr class="w3-clear">
+                        z++;
+                    }
+
+                    <br><br><br><br>
+
+                    <input onclick="submitAnswers();" class="btn btn-primary" value="Submit Answers" style="background-color: #4d636f;border-color: #4d636f;padding: 8px 37px;float: right;" type="button">
+                </fieldset>
+            </form>
+        </section>
+        <footer>
+            <p>Copyright &copy; 2018</p>
+        </footer>
+    </div>
+</body>
+</html>
+
+
+<script src="~/js/jquery-1.11.2.min.js"></script>
+
+<script type="text/javascript">
+
+    //Get user input
+    function getCheckedValue(radioName) {
+        var radios = $('input:radio[name=' + radioName + ']:checked').val();
+        return radios; // Get radio group by-name
+    }
+
+
+    function submitAnswers() {
+    var total = 0;
+    var score = 0;
+
+
+
+          // Set correct answers
+         @foreach(var o in Model) {
+           // Check answers
+           <text>
+           if (getCheckedValue('@o.Id') == "@o.S")
+           {
+               score = score + 1;
+           }
+           total = total + 1;
+           </text>
+         }
+         var deg = (score * 100) / total;
+         var results = document.getElementById('results');
+         results.innerHTML = '<h2><span> ' + deg +'%   </span></h2><br><h3>You scored: <span>' + score + '</span>/' + total + '</h3>';
+         var formm = document.getElementsByName('fo');
+         formm.disabled = "disabled";
+
+        $.ajax({
+             type: 'POST',
+             url: '@Url.Action("SaveFinal", "Levels")',
+             data: { M: deg },
+             dataType: 'json',
+             success: function (data) {
+                 window.location.href = data;
+             },
+             error: function (xhr) {
+                 window.location.href = data;
+             }
+         });
+
+         return false;
+}
+//_____________________________________________________________________________________________
+
+@*//<---- Time ---->//
+function addZero(x, n) {
+    while (x.toString().length < n) {
+        x = "0" + x;
+    }
+    return x;
+}
+
+    var countDownDate = new Date('@timeout.Hour : @timeout.Minute : @timeout.Second').getTime();
+    var x = setInterval(function () {
+        var now = new Date().getTime();
+        var distance = countDownDate - now;
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        hours = addZero(hours, 2);
+        minutes = addZero(minutes, 2);
+        seconds = addZero(seconds, 2);
+
+        document.getElementById("demo").innerHTML = hours + ":" + minutes + ":" + seconds;
+
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("demo").innerHTML = "EXPIRED!";
+        }
+    }, 1000);*@
+
+</script>
+

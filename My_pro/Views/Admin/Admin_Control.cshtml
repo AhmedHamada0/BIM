@@ -1,0 +1,285 @@
+﻿@model IEnumerable<My_pro.Model.Blogs>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Admin</title>
+    <link rel="icon" type="image/png" href="~/img/Default/Icon/Bim.png" />
+    <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="~/css/sb-admin.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/material-dashboard.min28b5.css?v=2.0.0">
+</head>
+
+<body>
+    <div class="sticky-footer bg-dark" id="page-top">
+        <div class="content-wrapper">
+            <div class="container-fluid">
+                <ol class="breadcrumb" style="background-color: #4d636f;">
+                    <li class="breadcrumb-item active" style="color: #fff;">My Dashboard</li>
+                </ol>
+                <!-- Icon Cards-->
+                <div class="row">
+                    <div class="col-xl-3 col-sm-6 mb-3">
+                        <div class="card text-white bg-primary o-hidden h-100">
+                            <div class="card-body">
+                                <div class="card-body-icon">
+                                    <i class="fa fa-fw fa-university"></i>
+                                </div>
+                                <div class="mr-5">Main Page</div>
+                            </div>
+                            <a class="card-footer text-white clearfix small z-1" href="../../../Home/Main">
+                                <span class="float-left">View </span>
+                                <span class="float-right" style="margin-left: 77%;">
+                                    <i class="fa fa-angle-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 mb-3">
+                        <div class="card text-white bg-warning o-hidden h-100">
+                            <div class="card-body">
+                                <div class="card-body-icon">
+                                    <i class="fa fa-graduation-cap"></i>
+                                </div>
+                                <div class="mr-5">Courses Section!</div>
+                            </div>
+                            <a class="card-footer text-white clearfix small z-1" href="../../../Levels/LevelsView">
+                                <span class="float-left">View</span>
+                                <span class="float-right" style="margin-left: 77%;">
+                                    <i class="fa fa-angle-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 mb-3">
+                        <div class="card text-white bg-success o-hidden h-100">
+                            <div class="card-body">
+                                <div class="card-body-icon">
+                                    <i class="fa fa-fw fa-folder"></i>
+                                </div>
+                                <div class="mr-5">Files Section!</div>
+                            </div>
+                            <a class="card-footer text-white clearfix small z-1" href="../../../Files/All_Files">
+                                <span class="float-left">View</span>
+                                <span class="float-right" style="margin-left: 77%;">
+                                    <i class="fa fa-angle-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 mb-3">
+                        <div class="card text-white bg-danger o-hidden h-100">
+                            <div class="card-body">
+                                <div class="card-body-icon">
+                                    <i class="fa fa-fw fa-lightbulb-o"></i>
+                                </div>
+                                <div class="mr-5">Blogs Section!</div>
+                            </div>
+                            <a class="card-footer text-white clearfix small z-1" href="../../../Blog/SearchBlog">
+                                <span class="float-left">View</span>
+                                <span class="float-right" style="margin-left: 77%;">
+                                    <i class="fa fa-angle-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <br><br>
+                <div class="row" style="display: block;margin-left: auto;margin-right: auto;width: 97%;">
+                    <div class="col-md-11" style="max-width: 100%;box-shadow: 0 2px 50px 0 rgba(0,0,0,50.15),0 2px 10px 0 rgba(0,0,0,0.15) !important;">
+                        <div class="card card-chart">
+                            <div class="card-header card-header-success TopTx">
+                                Admin
+                            </div>
+                            <div class="card-body">
+                                <div id="page-inner">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <h2>Admin Dashboard</h2>
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <div class="row text-center pad-top">
+                                        <div class="col-lg-4 col-md-2 col-sm-2 col-xs-6">
+                                            <div class="div-square">
+                                                <a href="../../../Levels/ViewCoursesAdmin">
+                                                    <i class="fa fa-graduation-cap fa-5x"></i>
+                                                    <h4>Courses</h4>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-2 col-sm-2 col-xs-6">
+                                            <div class="div-square">
+                                                <a href="../../../Admin/AllUsersList">
+                                                    <i class="fa fa-users fa-5x"></i>
+                                                    <h4>Users</h4>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-2 col-sm-2 col-xs-6">
+                                            <div class="div-square">
+                                                <a href="../../../Blog/BlogsList">
+                                                    <i class="fa fa-lightbulb-o fa-5x"></i>
+                                                    <h4>Blogs</h4>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-2 col-sm-2 col-xs-6">
+                                            <div class="div-square">
+                                                <a href="../../../Levels/Chapter">
+                                                    <i class="fa fa-book fa-5x"></i>
+                                                    <h4>Chapters</h4>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-2 col-sm-2 col-xs-6">
+                                            <div class="div-square">
+                                                <a href="../../../Levels/Lectures">
+                                                    <i class="fa fa-desktop fa-5x"></i>
+                                                    <h4>Lectures</h4>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-2 col-sm-2 col-xs-6">
+                                            <div class="div-square">
+                                                <a href="../../../Levels/Question">
+                                                    <i class="fa fa-question-circle fa-5x"></i>
+                                                    <h4>Questions</h4>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row text-center pad-top">
+                                        <div class="col-lg-4 col-md-2 col-sm-2 col-xs-6">
+                                            <div class="div-square">
+                                                <a href="../../../Files/My_Files">
+                                                    <i class="fa fa-folder-open fa-5x"></i>
+                                                    <h4>My Files</h4>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-2 col-sm-2 col-xs-6">
+                                            <div class="div-square">
+                                                <a href="../../../Files/All_Files">
+                                                    <i class="fa fa-folder fa-5x"></i>
+                                                    <h4>All Files</h4>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-2 col-sm-2 col-xs-6">
+                                            <div class="div-square">
+                                                <a href="../../../Files/Upload_File">
+                                                    <i class="fa fa-upload fa-5x"></i>
+                                                    <h4>Upload File</h4>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-2 col-sm-2 col-xs-6">
+                                            <div class="div-square">
+                                                <a href="../../../Home/Base">
+                                                    <i class="fa fa-home fa-5x"></i>
+                                                    <h4>Home Page</h4>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-2 col-sm-2 col-xs-6">
+                                            <div class="div-square">
+                                                <a href="../../../Home/Main">
+                                                    <i class="fa fa-university fa-5x"></i>
+                                                    <h4>Main Page</h4>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-2 col-sm-2 col-xs-6">
+                                            <div class="div-square">
+                                                <a href="../../../Home/About">
+                                                    <i class="fa fa-exclamation-circle fa-5x"></i>
+                                                    <h4>About</h4>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <br>
+                                            <div class="alert alert-danger" style="background-color: #4d636f;"><strong>These services are Authorized for administrator,</strong>  and are not available to the user.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-11" style="max-width: 100%;box-shadow: 0 2px 50px 0 rgba(0,0,0,50.15),0 2px 10px 0 rgba(0,0,0,0.15) !important;margin-top: 6%;">
+                        <div class="card card-chart">
+                            <div class="card-header card-header-success TopTx">
+                                Blogs
+                            </div>
+                            <div class="card-body">
+                                <h4 class="card-title">View Blogs</h4>
+                                <div class="card-columns" style="margin: 0 1%;">
+                                    <!-- Example Social Card-->
+                                   @foreach (var o in Model)
+                                    {
+                                        <div class="card mb-3">
+                                            <a href="@Url.Action("ViewB", "Blog",new { id = o.Id })">
+                                                <iframe src="@o.URL" class="Blogimg card-img-top img-fluid w-100" scrolling="no" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" frameborder="0"></iframe>
+                                            </a>
+                                            <div class="card-body">
+                                                <h6 class="card-title mb-1"><a href="@Url.Action("ViewB", "Blog",new { id = o.Id })">@o.UserName</a></h6>
+                                                <p class="card-text small">
+                                                    @o.Toptext<br />
+                                                    @if (o.Link1 != "" && o.Link1 != null)
+                                                    {<a href="@o.Link1"># @o.Link1</a><br />}
+                                                    @if (o.Link2 != "" && o.Link2 != null)
+                                                    {<a href="@o.Link2"># @o.Link2</a><br />}
+                                                    @if (o.Link3 != "" && o.Link3 != null)
+                                                    {<a href="@o.Link3"># @o.Link3</a><br />}
+                                                </p>
+                                            </div>
+                                            <hr class="my-0">
+                                            <div class="card-body py-2 small">
+                                                <a class="mr-3 d-inline-block" href="@Url.Action("ViewB", "Blog",new { id = o.Id })">
+                                                    <i class="fa fa-fw fa-eye"></i>View
+                                                </a>
+                                                <a class="mr-3 d-inline-block" href="@Url.Action("ViewB", "Blog",new { id = o.Id })">
+                                                    <i class="fa fa-fw fa-comment"></i>Comment
+                                                </a>
+                                            </div>
+                                            <hr class="my-0">
+                                            <div class="card-footer small text-muted">@o.Date</div>
+                                        </div>
+                                    }
+                                </div>
+                                <br>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats">
+                                    <a class="material-icons" href="../../../Blog/SearchBlog">View more blogs</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+        </div>
+    </div>
+    <div class="alert alert-danger" style="margin-bottom: 0;background-color: #3a444b;"><strong>Copyright © 2018</strong>BimArabia.</div>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top" style="display: inline; z-index: 10;">
+        <i class="fa fa-angle-up"></i>
+    </a>
+    </body>
+</html>
